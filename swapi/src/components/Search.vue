@@ -1,8 +1,12 @@
 <template>
   <div id="example-1">
-    <input id="search" placeholder="搜索" v-model="content"></input>
-    <button v-on:click="get()">Search</button>
-    <p width="100px" height="100px">{{msg}}</p>
+    <div>
+      <input id="search" placeholder="搜索" v-model="content"></input>
+      <button v-on:click="get()">Search</button>
+    </div>
+    <div>
+      <textarea v-model="msg" rows="30" cols="100"></textarea>
+    </div>
   </div>
 </template>
 
@@ -19,7 +23,7 @@ export default {
     get: function() {
       this.$http.get("https://swapi.co/api/"+this.content).then(
         function(res) {
-          this.msg = res.data;
+          this.msg = JSON.stringify(res.data, null, 4);
         }, function() {
           alert("error");
         });
