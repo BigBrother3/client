@@ -45,8 +45,8 @@ export default {
             }
           }
         },
-        function() {
-          alert("error");
+        function(res) {
+          alert(res.data);
         });
     }
   }

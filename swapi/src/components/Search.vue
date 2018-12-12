@@ -96,10 +96,4 @@ export default {
 #con {
   margin-top: 10px;
 }
-
-#title {
-  position:fixed;
-  top: 0px;
-  left: 10px;
-}
 </style>
