@@ -9,10 +9,6 @@
 export default {
   name: 'App'
 }
-
-window.onload = function() {
-  $cookies.set("LogInUser", "guess");
-}
 </script>
 
 <style>

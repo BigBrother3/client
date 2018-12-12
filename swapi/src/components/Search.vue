@@ -1,5 +1,13 @@
 <template>
   <div id="example-1">
+    <div id="title">
+      <p>
+        <router-link to="/">Sign in</router-link>
+      </p>
+      <p>
+        <router-link to="/Signup">Sign up</router-link>
+      </p>
+    </div>
     <div>
       <button id="prev" v-on:click="prevPage()">prev</button>
       <input id="search" placeholder="搜索" v-model="content"></input>
@@ -32,6 +40,7 @@ export default {
         return;
       }
       console.log("login:",$cookies.get("LogInUser"));
+      var jwtToken = $cookies.get("LogInUser");
       this.$http.get("http://localhost:8080/api/" + this.content).then(
         function(res) {
           if(res.ok) {
@@ -87,5 +96,11 @@ export default {
 <style>
 #con {
   margin-top: 10px;
+}
+
+#title {
+  position:fixed;
+  top: 0px;
+  left: 10px;
 }
 </style>

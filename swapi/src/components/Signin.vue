@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     post: function() {
-      this.$http.post("https://localhost:8080/", 
+      this.$http.post("http://localhost:8080/login", 
         {
           username:this.usr, 
           password:this.psw
@@ -40,9 +40,11 @@ export default {
         ).then(
         function(res) {
           if(res.ok) {
-            console.log(res.data);
-            $cookies.set("LogInUser", res.data);
-            this.$router.push({path:'/Search'});
+            var strContent = JSON.stringify(res.data);
+            var jsonContent = JSON.parse(strContent);
+            console.log("token:",jsonContent["token"]);
+            $cookies.set("LogInUser", jsonContent["token"]);
+            this.$router.push({path:"/Search"});
           }
           else {
             alert("Error: Sign in error!");
@@ -54,7 +56,7 @@ export default {
     },
 
     guessMode: function() {
-      $cookies.set("LogInUser", "guess");
+      $cookies.set("LogInUser", "guest");
     }
   }
 }

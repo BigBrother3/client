@@ -11,6 +11,16 @@ Vue.use(VueCookies)
 Vue.config.productionTip = false
 Vue.http.options.emulateJSON = true;
 
+Vue.http.interceptors.push((request, next)=>{
+    var jwtToken = $cookies.get("LogInUser");
+    console.log("req: ", jwtToken);
+    if(jwtToken != "guest"){
+      request.headers.set("Authorization", 'Bearer ' + $cookies.get("LogInUser"));
+    }
+    next((response)=>{
+      return response;
+    });
+});
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
