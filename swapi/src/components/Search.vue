@@ -26,11 +26,12 @@ export default {
   },
   methods: {
     get: function() {
-      var flag = /^[a-z]{1,10}((\/[a-zA-Z0-9]*)*|(\/\?page\=\d))$/.test(this.content);
+      var flag = /^([a-z]{1,10}((\/[0-9]*)|(\/\?page\=\d)))?$/.test(this.content);
       if(!flag) {
         alert("input error");
         return;
       }
+      console.log("login:",$cookies.get("LogInUser"));
       this.$http.get("http://localhost:8080/api/" + this.content).then(
         function(res) {
           if(res.ok) {
@@ -39,7 +40,10 @@ export default {
         }, function() {
           alert("error");
         });
-      this.getPages();
+
+      if(this.content != ""){
+        this.getPages();
+      }
     },
 
     getPages: function() {

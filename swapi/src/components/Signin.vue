@@ -1,8 +1,20 @@
 <template>
-  <div id="example-1">
-    <input id="username" type="text" placeholder="用户名" v-model="usr"></input>
-    <input id="password" type="password" placeholder="密码" v-model="psw"></input>
-    <button v-on:click="post">SIGN IN</button>
+  <div id="login">
+    <p>
+      <input id="username" type="text" placeholder="用户名" v-model="usr"></input>
+    </p>
+    <p>
+      <input id="password" type="password" placeholder="密码" v-model="psw"></input>
+    </p>
+    <p>
+      <button v-on:click="post">SIGN IN</button>
+    </p>
+    <p>
+      <a href="#/Search" v-on:click="guessMode()">Sign in as guess</a>
+    </p>
+    <p>
+      <router-link to="/Signup">Sign up</router-link>
+    </p>
   </div>
 </template>
 
@@ -17,14 +29,32 @@ export default {
   },
   methods: {
     post: function() {
-      this.$http.post("https://localhost:8080/", {username:this.usr, password:this.psw},{withCredentials:true}).then(
+      this.$http.post("https://localhost:8080/", 
+        {
+          username:this.usr, 
+          password:this.psw
+        },
+        {
+          withCredentials:true
+        }
+        ).then(
         function(res) {
-          console.log(res.data);
-          $cookies.set("LogInUser", res.data);
-          this.$router.push({path:'/Search'})
-        }, function() {
+          if(res.ok) {
+            console.log(res.data);
+            $cookies.set("LogInUser", res.data);
+            this.$router.push({path:'/Search'});
+          }
+          else {
+            alert("Error: Sign in error!");
+          }
+        },
+        function() {
           alert("error");
         });
+    },
+
+    guessMode: function() {
+      $cookies.set("LogInUser", "guess");
     }
   }
 }
