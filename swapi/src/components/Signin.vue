@@ -16,9 +16,12 @@ export default {
     };
   },
   methods: {
-    get: function() {
-      this.$http.post("", {"username":this.usr, "password":this.psw}).then(function(res) {
+    post: function() {
+      this.$http.post("https://localhost:8080/", {username:this.usr, password:this.psw},{withCredentials:true}).then(
+        function(res) {
           console.log(res.data);
+          $cookies.set("LogInUser", res.data);
+          this.$router.push({path:'/Search'})
         }, function() {
           alert("error");
         });
