@@ -39,8 +39,7 @@ export default {
         alert("input error");
         return;
       }
-      console.log("login:",$cookies.get("LogInUser"));
-      var jwtToken = $cookies.get("LogInUser");
+      //console.log("login:",$cookies.get("LogInUser"));
       this.$http.get("http://localhost:8080/api/" + this.content).then(
         function(res) {
           if(res.ok) {

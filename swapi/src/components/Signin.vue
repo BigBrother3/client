@@ -42,7 +42,7 @@ export default {
           if(res.ok) {
             var strContent = JSON.stringify(res.data);
             var jsonContent = JSON.parse(strContent);
-            console.log("token:",jsonContent["token"]);
+            //console.log("token:",jsonContent["token"]);
             $cookies.set("LogInUser", jsonContent["token"]);
             this.$router.push({path:"/Search"});
           }

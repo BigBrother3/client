@@ -13,7 +13,7 @@ Vue.http.options.emulateJSON = true;
 
 Vue.http.interceptors.push((request, next)=>{
     var jwtToken = $cookies.get("LogInUser");
-    console.log("req: ", jwtToken);
+    //console.log("req: ", jwtToken);
     if(jwtToken != "guest"){
       request.headers.set("Authorization", 'Bearer ' + $cookies.get("LogInUser"));
     }
