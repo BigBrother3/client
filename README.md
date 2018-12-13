@@ -9,6 +9,7 @@ npm install -g @vue/cli-init
 vue init webpack my-project
 
 # 安装依赖
+cd my-project
 npm install
 
 # 服务以热重载的方式运行在 localhost:8000
